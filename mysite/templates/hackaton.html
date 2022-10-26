@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rueda de la vida</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(255, 26, 104, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100vw;
+        height: calc(130vh - 40px);
+        background: rgba(255, 26, 104, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(255, 26, 104, 1);
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chartMenu">
+      <p>Rueda de la vida</p>
+    </div>
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+        <table>
+          <tr><td>Dinero:</td><td><input oninput="updateDinero(this)" type="range" id="dinero" min="0" max="100" value="1"></td></tr>
+          <tr><td>Ocio: </td><td><input oninput="updateOcio(this)" type="range" id="ocio" min="0" max="100" value="1"></td></tr>
+          <tr><td>Amor: </td><td><input oninput="updateAmor(this)" type="range" id="amor" min="0" max="100" value="1"></td></tr>
+          <tr><td>Familia: </td><td><input oninput="updateFamilia(this)" type="range" id="familia" min="0" max="100" value="1"></td></tr>
+          <tr><td>Amigos: </td><td><input oninput="updateAmigos(this)" type="range" id="amigos" min="0" max="100" value="1"></td></tr>
+          <tr><td>Profesion: </td><td><input oninput="updateProfesion(this)" type="range" id="profesion" min="0" max="100" value="1"></td></tr>
+          <tr><td>Salud: </td><td><input oninput="updateSalud(this)" type="range" id="salud" min="0" max="100" value="1"></td></tr>
+          <tr><td>Desarrollo Personal: </td><td><input oninput="updateDesarrollo(this)" type="range" id="desarrollo" min="0" max="100" value="1"></td></tr>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // setup
+    const labels = ['Dinero', 'Ocio', 'Amor', 'Familia', 'Amigos', 'Profesion', 'Salud', 'Desarrollo Personal']
+    const datapoints = [0, 0, 0, 0, 0, 0, 0, 0]
+    const backgroundColor = [ 'rgba(255, 26, 104, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)', 'rgba(0, 0, 0, 0.2)', 'rgba(235, 126, 194, 0.2)']
+    const borderColor = [ 'rgba(255, 26, 104, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(0, 0, 0, 1)', 'rgba(235, 126, 194, 1)']
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Valores de la vida en porcentaje',
+        data: datapoints,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+        borderWidth: 1
+      }]
+    };
+
+    // config
+    const config = {
+      type: 'polarArea',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    const torta = new Chart(
+      document.getElementById('torta'),
+      configTorta
+    );
+
+    const dinero = document.getElementById('dinero');
+    const ocio = document.getElementById('ocio');
+    const amor = document.getElementById('amor');
+    const familia = document.getElementById('familia');
+    const amigos = document.getElementById('amigos');
+    const profesion = document.getElementById('profesion');
+    const salud = document.getElementById('salud');
+    const desarrollo = document.getElementById('desarrollo');
+
+    function updateDinero(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[0] = range.value;
+      myChart.update();
+    }
+
+    function updateOcio(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[1] = range.value;
+      myChart.update();
+    }
+
+    function updateAmor(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[2] = range.value;
+      myChart.update();
+    }
+
+    function updateFamilia(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[3] = range.value;
+      myChart.update();
+    }
+
+    function updateAmigos(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[4] = range.value;
+      myChart.update();
+    }
+
+    function updateProfesion(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[5] = range.value;
+      myChart.update();
+    }
+
+    function updateSalud(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[6] = range.value;
+      myChart.update();
+    }
+
+    function updateDesarrollo(range) {
+      console.log(range.value);
+      myChart.config.data.datasets[0].data[7] = range.value;
+      myChart.update();
+    }
+
+    </script>
+
+  </body>
+</html>

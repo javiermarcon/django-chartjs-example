@@ -5,6 +5,14 @@ from django.http import JsonResponse
 from mysite.core.models import City
 
 
+def newchart(request):
+    return render(request, 'newchart.html')
+
+
+def hackaton(request):
+    return render(request, 'hackaton.html')
+
+
 def home(request):
     return render(request, 'home.html')
 
